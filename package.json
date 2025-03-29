@@ -1,0 +1,15 @@
+{
+  "name": "com.owmacohe.resonant",
+  "displayName": "Resonant",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    
+  },
+  "keywords": [ ],
+  "author": {
+    "name": "Owen Hellum",
+    "email": "omch@protonmail.com",
+    "url": "https://omch.tech"
+  }
+}
