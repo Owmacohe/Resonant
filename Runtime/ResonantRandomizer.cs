@@ -10,6 +10,7 @@ namespace Resonant.Runtime
     [RequireComponent(typeof(AudioSource))]
     public class ResonantRandomizer : MonoBehaviour
     {
+        public string ID;
         [SerializeField] List<AudioClip> clips;
         
         [Header("Frequency")]
@@ -28,7 +29,10 @@ namespace Resonant.Runtime
         bool looping;
 
         float defaultVolume;
+        [HideInInspector] public float volumeScale;
+        
         float defaultPitch;
+        [HideInInspector] public float pitchScale;
 
         void Start()
         {
@@ -37,7 +41,10 @@ namespace Resonant.Runtime
             delayModulation = ClampVector2(delayModulation, 0, float.PositiveInfinity);
             
             defaultVolume = source.volume;
+            volumeScale = 1;
+            
             defaultPitch = source.pitch;
+            pitchScale = 1;
 
             if (loopOnStart) PlayLoop();
         }
@@ -84,8 +91,8 @@ namespace Resonant.Runtime
 
             source.Stop();
             source.clip = lastPlayedClip;
-            source.volume = defaultVolume + Random.Range(volumeModulation.x, volumeModulation.y);
-            source.pitch = defaultPitch + Random.Range(pitchModulation.x, pitchModulation.y);
+            source.volume = (defaultVolume + Random.Range(volumeModulation.x, volumeModulation.y)) * volumeScale;
+            source.pitch = (defaultPitch + Random.Range(pitchModulation.x, pitchModulation.y)) * pitchScale;
             source.Play();
         }
     }

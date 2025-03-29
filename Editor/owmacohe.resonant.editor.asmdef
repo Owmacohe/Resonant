@@ -1,7 +1,9 @@
 {
-    "name": "owmacohe.resonant.runtime",
+    "name": "owmacohe.resonant.editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:cd0c867d4783b0242af20644f4b6a074"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
