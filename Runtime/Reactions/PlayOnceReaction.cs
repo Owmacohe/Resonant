@@ -6,9 +6,13 @@ namespace Resonant.Runtime
     [Serializable]
     public class PlayOnceReaction : ResonantReaction
     {
-        public override IEnumerator OnReact(ResonantRandomizer randomizer)
+        public override IEnumerator OnReact(ResonantSource source)
         {
-            randomizer.PlayOnce();
+            var randomizer = source.GetComponent<ResonantRandomizer>();
+            
+            if (randomizer) randomizer.PlayOnce();
+            else source.Source.PlayOneShot(source.Source.clip);
+            
             yield return null;
         }
     }

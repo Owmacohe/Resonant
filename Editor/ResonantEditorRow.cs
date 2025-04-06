@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Linq;
 using System.Reflection;
 using Resonant.Runtime;
@@ -11,6 +12,7 @@ namespace Resonant.Editor
     public class ResonantEditorRow : VisualElement
     {
         readonly string DISALLOWED_CHARACTERS = ",\\/\n\t\r"; // Characters not allowed in the entry fields
+        bool isEven;
         
         /// <summary>
         /// Returns a string, without the disallowed characters
@@ -19,33 +21,52 @@ namespace Resonant.Editor
         /// <returns>A validated string, with no disallowed characters</returns>
         string ValidateInputValue(string value) => new(value.Where(c => !DISALLOWED_CHARACTERS.Contains(c)).ToArray());
         
-        public ResonantEditorRow(ResonantTrigger trigger, Action saveAction)
+        public ResonantEditorRow(ResonantTrigger trigger, ResonantBehaviour behaviour, Action saveAction)
         {
             AddToClassList("flex_row");
 
+            VisualElement triggerRow = new();
+            triggerRow.AddToClassList("flex_row");
+            triggerRow.AddToClassList("trigger");
+            Add(triggerRow);
+            
+            Button remove = new();
+            remove.text = "-";
+            triggerRow.Add(remove);
+
             TextElement when = new();
             when.text = "When";
-            Add(when);
+            triggerRow.Add(when);
 
             TextField triggerID = new();
             triggerID.value = trigger.ID;
-            Add(triggerID);
+            triggerRow.Add(triggerID);
 
             TextElement arrow = new();
             arrow.text = "->";
-            Add(arrow);
+            triggerRow.Add(arrow);
 
             VisualElement reactions = new();
             reactions.AddToClassList("flex_column");
+            reactions.AddToClassList("reactions");
             Add(reactions);
 
             VisualElement addReactionRow = new();
             addReactionRow.AddToClassList("flex_row");
+            addReactionRow.AddToClassList("reaction_add");
             reactions.Add(addReactionRow);
             
             Button addReaction = new();
-            addReaction.text = "+";
+            addReaction.text = "Add reaction";
             addReactionRow.Add(addReaction);
+
+            remove.clicked += () =>
+            {
+                behaviour.Triggers.Remove(trigger);
+                ResonantEditorUtilities.RemoveElement(this);
+                
+                saveAction?.Invoke();
+            };
 
             var reactionTypes = Assembly.GetAssembly(typeof(ResonantReaction)).GetTypes()
                 .Where(type => type.IsSubclassOf(typeof(ResonantReaction)))
@@ -57,7 +78,7 @@ namespace Resonant.Editor
             addReactionRow.Add(reactionDropdown);
             
             foreach (var i in trigger.Reactions)
-                AddReaction(i, reactions, saveAction);
+                AddReaction(i, reactions, trigger, saveAction);
 
             triggerID.RegisterValueChangedCallback(evt =>
             {
@@ -73,7 +94,7 @@ namespace Resonant.Editor
             {
                 var reactionType = reactionTypes[reactionDropdown.index];
                 var newReaction = (ResonantReaction)Activator.CreateInstance(reactionType);
-                AddReaction(newReaction, reactions, saveAction);
+                AddReaction(newReaction, reactions, trigger, saveAction);
                 
                 trigger.Reactions.Add(newReaction);
                 
@@ -81,24 +102,44 @@ namespace Resonant.Editor
             };
         }
 
-        void AddReaction(ResonantReaction reaction, VisualElement parent, Action saveAction)
+        void AddReaction(ResonantReaction reaction, VisualElement parent, ResonantTrigger trigger, Action saveAction)
         {
+            isEven = !isEven;
+            
             VisualElement root = new();
             root.AddToClassList("flex_row");
+            root.AddToClassList("reaction");
+            root.AddToClassList("reaction_" + (isEven ? "a" : "b"));
             parent.Add(root);
+
+            Button remove = new();
+            remove.text = "-";
+            root.Add(remove);
             
             TextElement name = new();
-            name.text = reaction.GetType().ToString().Split('.')[^1];
+            name.text = "<b>" + reaction.GetType().ToString().Split('.')[^1] + "</b>";
+            name.AddToClassList("reaction_name");
             root.Add(name);
+
+            remove.clicked += () =>
+            {
+                trigger.Reactions.Remove(reaction);
+                ResonantEditorUtilities.RemoveElement(root);
+                
+                saveAction?.Invoke();
+            };
 
             foreach (var i in reaction.GetType().GetFields())
             {
-                TextField field = new TextField(i.Name + ":");
+                string fieldNameFormat = "<i>({0})</i> " + i.Name + ":";
+                TextField field = new();
                 if (i.GetValue(reaction) != null) field.value = i.GetValue(reaction).ToString();
                 root.Add(field);
                 
                 if (i.FieldType == typeof(int))
                 {
+                    field.label = string.Format(fieldNameFormat, "int");
+                    
                     field.RegisterValueChangedCallback(evt =>
                     {
                         string value = ValidateInputValue(evt.newValue);
@@ -110,6 +151,8 @@ namespace Resonant.Editor
                 }
                 else if (i.FieldType == typeof(float))
                 {
+                    field.label = string.Format(fieldNameFormat, "float");
+                    
                     field.RegisterValueChangedCallback(evt =>
                     {
                         string value = ValidateInputValue(evt.newValue);
@@ -121,6 +164,8 @@ namespace Resonant.Editor
                 }
                 else if (i.FieldType == typeof(string))
                 {
+                    field.label = string.Format(fieldNameFormat, "string");
+
                     field.RegisterValueChangedCallback(evt =>
                     {
                         string value = ValidateInputValue(evt.newValue);
@@ -133,3 +178,5 @@ namespace Resonant.Editor
         }
     }
 }
+
+#endif

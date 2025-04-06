@@ -7,10 +7,8 @@ using Random = UnityEngine.Random;
 
 namespace Resonant.Runtime
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class ResonantRandomizer : MonoBehaviour
+    public class ResonantRandomizer : ResonantSource
     {
-        public string ID;
         [SerializeField] List<AudioClip> clips;
         
         [Header("Frequency")]
@@ -21,8 +19,6 @@ namespace Resonant.Runtime
         [SerializeField] Vector2 delayModulation = new(3, 6);
         [SerializeField] Vector2 volumeModulation;
         [SerializeField] Vector2 pitchModulation;
-
-        AudioSource source;
         
         bool hasPlayed;
         AudioClip lastPlayedClip;
@@ -34,16 +30,16 @@ namespace Resonant.Runtime
         float defaultPitch;
         [HideInInspector] public float pitchScale;
 
-        void Start()
+        new void Start()
         {
-            source = GetComponent<AudioSource>();
+            base.Start();
 
             delayModulation = ClampVector2(delayModulation, 0, float.PositiveInfinity);
             
-            defaultVolume = source.volume;
+            defaultVolume = Source.volume;
             volumeScale = 1;
             
-            defaultPitch = source.pitch;
+            defaultPitch = Source.pitch;
             pitchScale = 1;
 
             if (loopOnStart) PlayLoop();
@@ -51,10 +47,10 @@ namespace Resonant.Runtime
 
         void Reset()
         {
-            source = GetComponent<AudioSource>();
-            source.playOnAwake = false;
-            source.volume = 0.5f;
-            source.pitch = 1;
+            Source = GetComponent<AudioSource>();
+            Source.playOnAwake = false;
+            Source.volume = 0.5f;
+            Source.pitch = 1;
         }
 
         Vector2 ClampVector2(Vector2 v, float min, float max) => new(Mathf.Clamp(v.x, min, max), Mathf.Clamp(v.y, min, max));
@@ -89,11 +85,11 @@ namespace Resonant.Runtime
             lastPlayedClip = validClips[Random.Range(0, validClips.Count)];
             hasPlayed = true;
 
-            source.Stop();
-            source.clip = lastPlayedClip;
-            source.volume = (defaultVolume + Random.Range(volumeModulation.x, volumeModulation.y)) * volumeScale;
-            source.pitch = (defaultPitch + Random.Range(pitchModulation.x, pitchModulation.y)) * pitchScale;
-            source.Play();
+            Source.Stop();
+            Source.clip = lastPlayedClip;
+            Source.volume = (defaultVolume + Random.Range(volumeModulation.x, volumeModulation.y)) * volumeScale;
+            Source.pitch = (defaultPitch + Random.Range(pitchModulation.x, pitchModulation.y)) * pitchScale;
+            Source.Play();
         }
     }
 }

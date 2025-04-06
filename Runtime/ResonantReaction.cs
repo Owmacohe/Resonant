@@ -10,8 +10,8 @@ namespace Resonant.Runtime
     {
         public string ID;
 
-        public abstract IEnumerator OnReact(ResonantRandomizer randomizer);
-        public void OnReact(MonoBehaviour source, List<ResonantRandomizer> randomizers) =>
-            randomizers.ForEach(randomizer => source.StartCoroutine(OnReact(randomizer)));
+        public abstract IEnumerator OnReact(ResonantSource source);
+        public void OnReact(MonoBehaviour script, List<ResonantSource> sources) =>
+            sources.ForEach(source => script.StartCoroutine(OnReact(source)));
     }
 }

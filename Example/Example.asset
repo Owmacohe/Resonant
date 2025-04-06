@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352a84b1f0494ec3a964ed162fc6b5e1, type: 3}
-  m_Name: Test
+  m_Name: Example
   m_EditorClassIdentifier: 
   Triggers:
   - ID: TEST_TRIGGER
     Reactions:
-    - rid: 2431222094576746739
+    - rid: 1249208074073800788
   references:
     version: 2
     RefIds:
-    - rid: 2431222094576746739
+    - rid: 1249208074073800788
       type: {class: FadeInReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
       data:
         ID: TEST_GROUP
-        Time: 3
+        Time: 10

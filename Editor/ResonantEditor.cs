@@ -3,13 +3,18 @@
 using System;
 using Resonant.Runtime;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UIElements.Button;
 
 namespace Resonant.Editor
 {
     public class ResonantEditor : EditorWindow
     {
         ResonantBehaviour Behaviour;
+
+        VisualElement topRow;
+        ScrollView scroll;
         
         [MenuItem("Window/Resonant/Editor"), MenuItem("Tools/Resonant/Editor")]
         public static void Open()
@@ -22,11 +27,25 @@ namespace Resonant.Editor
             ResonantEditorUtilities.AddStyleSheet(rootVisualElement.styleSheets, "ResonantEditorStyleSheet");
 
             if (Behaviour == null) return;
+
+            rootVisualElement.style.backgroundColor = new StyleColor(new Color(0.157f, 0.157f, 0.157f));
+
+            topRow = new VisualElement();
+            topRow.AddToClassList("flex_row");
+            topRow.AddToClassList("top_row");
+            rootVisualElement.Add(topRow);
+
+            TextElement title = new();
+            title.text = Behaviour.name;
+            title.AddToClassList("title");
+            topRow.Add(title);
             
             Button addTrigger = new();
-            addTrigger.text = "+";
-            addTrigger.style.width = new StyleLength(22);
-            rootVisualElement.Add(addTrigger);
+            addTrigger.text = "Add trigger";
+            topRow.Add(addTrigger);
+
+            scroll = new();
+            rootVisualElement.Add(scroll);
             
             foreach (var i in Behaviour.Triggers) AddTrigger(i);
                 
@@ -40,9 +59,15 @@ namespace Resonant.Editor
             };
         }
 
+        void ClearGUI()
+        {
+            if (topRow != null) rootVisualElement.Remove(topRow);
+            if (scroll != null) rootVisualElement.Remove(scroll);
+        }
+
         void AddTrigger(ResonantTrigger trigger)
         {
-            rootVisualElement.Add(new ResonantEditorRow(trigger, Save));
+            scroll.Add(new ResonantEditorRow(trigger, Behaviour, Save));
         }
 
         void Save()
@@ -52,6 +77,8 @@ namespace Resonant.Editor
 
         public void Load(ResonantBehaviour behaviour)
         {
+            ClearGUI();
+            
             Behaviour = behaviour;
             
             CreateGUI();

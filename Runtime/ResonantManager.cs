@@ -9,11 +9,10 @@ namespace Resonant.Runtime
         
         public void Trigger(string id)
         {
-            var randomizers =
-                FindObjectsByType<ResonantRandomizer>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            var sources = FindObjectsByType<ResonantSource>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
             foreach (var i in behaviour.Triggers.Find(trigger => trigger.ID == id).Reactions)
-                i.OnReact(this, randomizers.ToList().Where(randomizer => randomizer.ID == i.ID).ToList());
+                i.OnReact(this, sources.ToList().Where(source => source.ID == i.ID).ToList());
         }
     }
 }

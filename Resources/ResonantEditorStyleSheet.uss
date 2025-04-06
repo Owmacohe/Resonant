@@ -1,18 +1,107 @@
-﻿.flex_row, .flex_column {
+﻿:root {
+    --background: #181818;
+    --dark: rgb(30, 30, 30);
+    --light: rgb(61, 61, 61);
+    --bright: rgb(182, 182, 182);
+
+    --yellow: darkgoldenrod;
+    --yellow-dark: rgb(143, 107, 17);
+    --yellow-bright: #eaaf1e;
+}
+
+.flex_row, .flex_column {
     display: flex;
 }
 .flex_row {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
 }
 .flex_column {
     flex-direction: column;
+}
+
+.top_row {
+    height: 8%;
+    align-items: center;
+    padding: 10px;
+}
+
+.title {
+    font-size: 25px;
+    margin-right: 20px;
+    color: var(--yellow-bright);
+}
+
+.trigger {
+    width: 560px;
+}
+
+.trigger TextElement, .trigger TextField {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.reactions {
+    width: 100%;
+}
+
+.reaction_add { margin-bottom: 10px; }
+
+.reaction {
+    padding: 8px;
+    align-items: center;
+}
+.reaction_a { background-color: var(--yellow); }
+.reaction_b { background-color: var(--yellow-dark); }
+
+.reaction TextElement, .reaction Label {
+    color: var(--background);
+}
+
+.reaction TextField TextElement {
+    color: var(--yellow-bright);
+}
+
+.reaction TextField {
+    margin-left: 20px;
+}
+
+.reaction Button {
+    margin-right: 10px;
+}
+
+.reaction_name {
+    width: 150px;
+}
+
+ScrollView {
+    height: 92%;
+}
+
+TextField {
+    width: 275px;
+}
+
+TextElement, PopupTextElement, Label, Button, TextField {
+    font-size: 15px;
+    color: var(--bright);
 }
 
 TextField Label {
     min-width: auto;
 }
 
+ResonantEditorRow {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: var(--dark);
+}
+
+DropdownField VisualElement, TextInput {
+    background-color: var(--light);
+}
+
 Button {
-    width: auto;
+    color: var(--background);
+    background-color: var(--yellow-bright);
 }
