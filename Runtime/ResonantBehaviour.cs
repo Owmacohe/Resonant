@@ -27,11 +27,18 @@ namespace Resonant.Runtime
     /// <summary>
     /// A reaction that is performed when a ResonantTrigger is called
     /// </summary>
-    /// <remarks>All inheriting classes must use the [Serialized] attribute!</remarks>
+    /// <remarks>
+    /// All inheriting classes must use the [Serialized] attribute and their names must end in 'Reaction'!
+    /// </remarks>
     [Serializable]
     public abstract class ResonantReaction
     {
         [Tooltip("The ID of the ResonantSources that this trigger affects")] public string ID;
+        
+        /// <summary>
+        /// Whether to wait until this reaction has finished before moving on to the next one
+        /// </summary>
+        [HideInInspector] public bool WaitUntilEnd;
         
         /// <summary>
         /// The delay (in seconds) between OnReact loops
@@ -43,13 +50,37 @@ namespace Resonant.Runtime
         /// </summary>
         /// <param name="source">The source that this reaction is applying to</param>
         public abstract IEnumerator OnReact(ResonantSource source);
-        
+
         /// <summary>
         /// A method called to perform this reaction for some amount of sources
         /// </summary>
         /// <param name="manager">The ResonantManager that this response is being called from</param>
         /// <param name="sources">The ResonantSources to apply this reaction to</param>
-        public void OnReact(ResonantManager manager, List<ResonantSource> sources) =>
-            sources.ForEach(source => manager.StartCoroutine(OnReact(source)));
+        public IEnumerator OnReact(ResonantManager manager, List<ResonantSource> sources)
+        {
+            for (int i = 0; i < sources.Count; i++)
+            {
+                var reaction = manager.StartCoroutine(OnReact(sources[i]));
+                if (i == 0) yield return reaction;
+            }
+        }
     }
+
+    /// <summary>
+    /// The attribute used to tell the editor to expose the WaitUntilEnd toggle
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class SkippableAttribute : Attribute { }
+
+    /// <summary>
+    /// The attribute used to tell the ResonantManager to yield return the reaction
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class WaitAttribute : Attribute { }
+
+    /// <summary>
+    /// The attribute used to indicate that this reaction requires no ResonantSource to function
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class SourcelessAttribute : Attribute { }
 }

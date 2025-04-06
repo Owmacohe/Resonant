@@ -8,7 +8,7 @@ namespace Resonant.Runtime
     /// If the source is a ResonantRandomizer: Starts the loop, and fades the volume in over some amount of time
     /// If the source is a regular ResonantSource: It plays the AudioClip and fades the volume in over some amount of time
     /// </summary>
-    [Serializable]
+    [Serializable, Skippable]
     public class FadeInReaction : ResonantReaction
     {
         /// <summary>

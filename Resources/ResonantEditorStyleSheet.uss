@@ -74,7 +74,7 @@ ResonantReactionRow TextField TextElement {
     color: var(--yellow-bright);
 }
 
-ResonantReactionRow TextField {
+ResonantReactionRow TextField, ResonantReactionRow Toggle {
     margin-left: 20px;
 }
 
@@ -83,7 +83,7 @@ ResonantReactionRow Button {
 }
 
 .reaction_name {
-    width: 150px;
+    width: 100px;
 }
 
 ScrollView {
@@ -91,7 +91,7 @@ ScrollView {
 }
 
 TextField {
-    width: 275px;
+    width: 250px;
 }
 
 TextElement, PopupTextElement, Label, Button, TextField {

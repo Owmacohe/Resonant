@@ -5,20 +5,19 @@ using UnityEngine;
 namespace Resonant.Runtime
 {
     /// <summary>
-    /// Prints a Debug.Log to the console
+    /// Waits for some number of seconds
     /// </summary>
-    [Serializable, Sourceless]
-    public class LogReaction : ResonantReaction
+    [Serializable, Wait, Sourceless]
+    public class WaitReaction : ResonantReaction
     {
         /// <summary>
-        /// The message to print
+        /// The amount of seconds to wait for
         /// </summary>
-        public string Message;
+        public float Seconds;
         
         public override IEnumerator OnReact(ResonantSource source)
         {
-            Debug.Log(Message);
-            yield return null;
+            yield return new WaitForSeconds(Seconds);
         }
     }
 }

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352a84b1f0494ec3a964ed162fc6b5e1, type: 3}
+  m_Name: Example_Behaviour
+  m_EditorClassIdentifier: 
+  Triggers:
+  - ID: TEST_TRIGGER
+    Reactions:
+    - rid: 1249208074073800788
+    - rid: 1249208091826454671
+    - rid: 1249208091826454661
+    - rid: 1249208091826454665
+  references:
+    version: 2
+    RefIds:
+    - rid: 1249208074073800788
+      type: {class: FadeInReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: TEST_GROUP
+        WaitUntilEnd: 1
+        Time: 5
+    - rid: 1249208091826454661
+      type: {class: WaitReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Seconds: 2
+    - rid: 1249208091826454665
+      type: {class: PlayOnceReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: TEST_BEEP
+        WaitUntilEnd: 0
+    - rid: 1249208091826454671
+      type: {class: StopReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: TEST_GROUP
+        WaitUntilEnd: 0
