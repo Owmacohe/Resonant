@@ -3,6 +3,10 @@ using System.Collections;
 
 namespace Resonant.Runtime
 {
+    /// <summary>
+    /// If the source is a ResonantRandomizer: Plays a single randomized AudioClip
+    /// If the source is a regular ResonantSource: It plays the AudioClip once
+    /// </summary>
     [Serializable]
     public class PlayOnceReaction : ResonantReaction
     {

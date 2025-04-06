@@ -7,6 +7,8 @@
     --yellow: darkgoldenrod;
     --yellow-dark: rgb(143, 107, 17);
     --yellow-bright: #eaaf1e;
+
+    --unsaved: lightcoral;
 }
 
 .flex_row, .flex_column {
@@ -28,8 +30,18 @@
 
 .title {
     font-size: 25px;
-    margin-right: 20px;
+    -unity-font-style: bold;
     color: var(--yellow-bright);
+}
+
+.unsaved {
+    font-size: 25px;
+    -unity-font-style: bold;
+    color: var(--unsaved);
+}
+
+.top_row Button, .unsaved {
+    margin-left: 15px;
 }
 
 .trigger {
@@ -47,26 +59,26 @@
 
 .reaction_add { margin-bottom: 10px; }
 
-.reaction {
+ResonantReactionRow {
     padding: 8px;
     align-items: center;
 }
 .reaction_a { background-color: var(--yellow); }
 .reaction_b { background-color: var(--yellow-dark); }
 
-.reaction TextElement, .reaction Label {
+ResonantReactionRow TextElement, ResonantReactionRow Label {
     color: var(--background);
 }
 
-.reaction TextField TextElement {
+ResonantReactionRow TextField TextElement {
     color: var(--yellow-bright);
 }
 
-.reaction TextField {
+ResonantReactionRow TextField {
     margin-left: 20px;
 }
 
-.reaction Button {
+ResonantReactionRow Button {
     margin-right: 10px;
 }
 
@@ -91,7 +103,7 @@ TextField Label {
     min-width: auto;
 }
 
-ResonantEditorRow {
+ResonantTriggerRow {
     margin-top: 30px;
     padding: 10px;
     background-color: var(--dark);

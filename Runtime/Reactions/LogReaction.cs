@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Resonant.Runtime
 {
+    /// <summary>
+    /// Prints a Debug.Log to the console
+    /// </summary>
     [Serializable]
     public class LogReaction : ResonantReaction
     {

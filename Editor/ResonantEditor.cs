@@ -14,6 +14,7 @@ namespace Resonant.Editor
         ResonantBehaviour Behaviour;
 
         VisualElement topRow;
+        TextElement unsaved;
         ScrollView scroll;
         
         [MenuItem("Window/Resonant/Editor"), MenuItem("Tools/Resonant/Editor")]
@@ -43,6 +44,15 @@ namespace Resonant.Editor
             Button addTrigger = new();
             addTrigger.text = "Add trigger";
             topRow.Add(addTrigger);
+            
+            Button save = new();
+            save.text = "Save";
+            topRow.Add(save);
+
+            unsaved = new();
+            unsaved.text = "*";
+            unsaved.AddToClassList("unsaved");
+            topRow.Add(unsaved);
 
             scroll = new();
             rootVisualElement.Add(scroll);
@@ -57,6 +67,10 @@ namespace Resonant.Editor
                 AddTrigger(newTrigger);
                 Save();
             };
+
+            save.clicked += Save;
+
+            SetUnsaved(false);
         }
 
         void ClearGUI()
@@ -67,12 +81,18 @@ namespace Resonant.Editor
 
         void AddTrigger(ResonantTrigger trigger)
         {
-            scroll.Add(new ResonantEditorRow(trigger, Behaviour, Save));
+            scroll.Add(new ResonantTriggerRow(trigger, Behaviour, Save, () => { SetUnsaved(true); }));
         }
 
         void Save()
         {
             ResonantEditorUtilities.SaveSerializedObject(Behaviour);
+            SetUnsaved(false);
+        }
+
+        void SetUnsaved(bool value)
+        {
+            unsaved.style.display = new StyleEnum<DisplayStyle>(value ? DisplayStyle.Flex : DisplayStyle.None);
         }
 
         public void Load(ResonantBehaviour behaviour)

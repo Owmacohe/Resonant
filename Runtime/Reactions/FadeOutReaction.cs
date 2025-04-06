@@ -4,12 +4,17 @@ using UnityEngine;
 
 namespace Resonant.Runtime
 {
+    /// <summary>
+    /// If the source is a ResonantRandomizer: Fades the volume out over some amount of time, and stops the loop
+    /// If the source is a regular ResonantSource: It fades the AudioClip volume out over some amount of time, then stops it
+    /// </summary>
     [Serializable]
     public class FadeOutReaction : ResonantReaction
     {
+        /// <summary>
+        /// The amount of time that the fade-out should take
+        /// </summary>
         public float Time;
-
-        readonly float STEP_SIZE = 0.01f;
         
         public override IEnumerator OnReact(ResonantSource source)
         {
@@ -17,14 +22,14 @@ namespace Resonant.Runtime
             float startTime = UnityEngine.Time.time;
             float sourceStartVolume = source.Source.volume;
             
-            if (randomizer) randomizer.volumeScale = 1;
+            if (randomizer) randomizer.VolumeScale = 1;
             else source.Source.volume = 1;
 
             while (UnityEngine.Time.time - startTime < Time)
             {
                 float volumeScale = 1 - ((UnityEngine.Time.time - startTime) / Time);
 
-                if (randomizer) randomizer.volumeScale = volumeScale;
+                if (randomizer) randomizer.VolumeScale = volumeScale;
                 else source.Source.volume = sourceStartVolume * volumeScale;
                 
                 yield return new WaitForSeconds(STEP_SIZE);
@@ -32,7 +37,7 @@ namespace Resonant.Runtime
 
             if (randomizer)
             {
-                randomizer.volumeScale = 0;
+                randomizer.VolumeScale = 0;
                 randomizer.StopLoop();   
             }
             else
