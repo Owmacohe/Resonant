@@ -2,11 +2,11 @@
   "name": "com.owmacohe.resonant",
   "displayName": "Resonant",
   "version": "1.0.0",
-  "description": "",
+  "description": "Resonant is a powerful modular audio manager and sound randomizer. Leveraging capabilities for randomized, looping sound clips, randomized volume and pitch modulation, and customizable audio events/reactions, Resonant is extendable and multi-purposed. Though it's powerful trigger/reaction system, design audio events and reactions to real-time code.",
   "dependencies": {
-    
+    "com.unity.textmeshpro": "0.0.1-security"
   },
-  "keywords": [ ],
+  "keywords": [ "audio manager", "randomized audio", "audio events" ],
   "author": {
     "name": "Owen Hellum",
     "email": "omch@protonmail.com",
