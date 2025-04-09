@@ -31,10 +31,7 @@ namespace Resonant.Runtime
         AudioClip lastPlayedClip; // The AudioClip that was last played by this source
         bool looping; // Whether to loop the playing of AudioClips
 
-        float defaultVolume; // The default volume that this source started at
         [HideInInspector] public float VolumeScale; // An independent volume amount used to uniformly scale the source's volume
-        
-        float defaultPitch; // The default pitch that this source started at
         [HideInInspector] public float PitchScale; // An independent pitch amount used to uniformly scale the source's pitch
 
         Vector2 ClampVector2(Vector2 v, float min, float max) => new(Mathf.Clamp(v.x, min, max), Mathf.Clamp(v.y, min, max));
@@ -45,24 +42,10 @@ namespace Resonant.Runtime
             
             delayModulation = ClampVector2(delayModulation, 0, float.PositiveInfinity); // Ensuring that the delay isn't less than 0
             
-            defaultVolume = Source.volume;
             VolumeScale = 1;
-            
-            defaultPitch = Source.pitch;
             PitchScale = 1;
 
             if (loopOnStart) PlayLoop();
-        }
-
-        /// <summary>
-        /// Called when this Component is reset via the inspector or is added
-        /// </summary>
-        void Reset()
-        {
-            Source = GetComponent<AudioSource>();
-            Source.playOnAwake = false;
-            Source.volume = 0.5f;
-            Source.pitch = 1;
         }
         
         /// <summary>
@@ -118,8 +101,8 @@ namespace Resonant.Runtime
             Source.clip = lastPlayedClip;
             
             // Randomly modulating the volume and pitch of the source
-            Source.volume = (defaultVolume + Random.Range(volumeModulation.x, volumeModulation.y)) * VolumeScale;
-            Source.pitch = (defaultPitch + Random.Range(pitchModulation.x, pitchModulation.y)) * PitchScale;
+            Source.volume = (DefaultVolume + Random.Range(volumeModulation.x, volumeModulation.y)) * VolumeScale;
+            Source.pitch = (DefaultPitch + Random.Range(pitchModulation.x, pitchModulation.y)) * PitchScale;
             
             Source.Play();
         }

@@ -37,13 +37,13 @@ namespace Resonant.Runtime
                 float volumeScale = (UnityEngine.Time.time - startTime) / Time;
 
                 if (randomizer) randomizer.VolumeScale = volumeScale;
-                else source.Source.volume = volumeScale;
+                else source.Source.volume = volumeScale * source.DefaultVolume;
 
                 yield return new WaitForSeconds(STEP_SIZE);
             }
 
             if (randomizer) randomizer.VolumeScale = 1;
-            else source.Source.volume = 1;
+            else source.Source.volume = source.DefaultVolume;
         }
     }
 }

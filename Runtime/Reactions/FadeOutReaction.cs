@@ -20,17 +20,16 @@ namespace Resonant.Runtime
         {
             var randomizer = source.GetComponent<ResonantRandomizer>();
             float startTime = UnityEngine.Time.time;
-            float sourceStartVolume = source.Source.volume;
             
             if (randomizer) randomizer.VolumeScale = 1;
-            else source.Source.volume = 1;
+            else source.Source.volume = source.DefaultVolume;
 
             while (UnityEngine.Time.time - startTime < Time)
             {
                 float volumeScale = 1 - ((UnityEngine.Time.time - startTime) / Time);
 
                 if (randomizer) randomizer.VolumeScale = volumeScale;
-                else source.Source.volume = sourceStartVolume * volumeScale;
+                else source.Source.volume = source.DefaultVolume * volumeScale;
                 
                 yield return new WaitForSeconds(STEP_SIZE);
             }

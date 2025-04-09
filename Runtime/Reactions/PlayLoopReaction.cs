@@ -13,8 +13,9 @@ namespace Resonant.Runtime
     {
         /// <summary>
         /// The amount of time that the loop should play for
+        /// (set to -1 to loop indefinitely)
         /// </summary>
-        public float Time;
+        public float Time = -1;
         
         public override IEnumerator OnReact(ResonantSource source)
         {

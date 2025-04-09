@@ -83,7 +83,7 @@ ResonantReactionRow Button {
 }
 
 .reaction_name {
-    width: 100px;
+    width: 160px;
 }
 
 ScrollView {
@@ -91,7 +91,7 @@ ScrollView {
 }
 
 TextField {
-    width: 250px;
+    min-width: 250px;
 }
 
 TextElement, PopupTextElement, Label, Button, TextField {

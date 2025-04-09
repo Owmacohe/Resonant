@@ -13,34 +13,112 @@ MonoBehaviour:
   m_Name: Example_Behaviour
   m_EditorClassIdentifier: 
   Triggers:
-  - ID: TEST_TRIGGER
+  - ID: START_FOOTSTEPS
     Reactions:
-    - rid: 1249208074073800788
-    - rid: 1249208091826454671
-    - rid: 1249208091826454661
-    - rid: 1249208091826454665
+    - rid: 1249208141461848192
+    - rid: 1249208141461848170
+    - rid: 1249208141461848154
+    - rid: 1249208141461848197
+  - ID: STOP_FOOTSTEPS
+    Reactions:
+    - rid: 1249208141461848194
+    - rid: 1249208141461848155
+    - rid: 1249208141461848171
+    - rid: 1249208141461848198
+  - ID: START_AMBIENT
+    Reactions:
+    - rid: 1249208141461848195
+    - rid: 1249208141461848180
+    - rid: 1249208141461848199
+  - ID: STOP_AMBIENT
+    Reactions:
+    - rid: 1249208141461848196
+    - rid: 1249208141461848181
+    - rid: 1249208141461848200
   references:
     version: 2
     RefIds:
-    - rid: 1249208074073800788
+    - rid: 1249208141461848154
       type: {class: FadeInReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
       data:
-        ID: TEST_GROUP
+        ID: FOOTSTEPS
         WaitUntilEnd: 1
-        Time: 5
-    - rid: 1249208091826454661
-      type: {class: WaitReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+        Time: 3
+    - rid: 1249208141461848155
+      type: {class: FadeOutReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: FOOTSTEPS
+        WaitUntilEnd: 1
+        Time: 3
+    - rid: 1249208141461848170
+      type: {class: PlaySoundbankClipReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: DOOR
+        WaitUntilEnd: 0
+        ClipIndex: 0
+    - rid: 1249208141461848171
+      type: {class: PlaySoundbankClipReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: DOOR
+        WaitUntilEnd: 0
+        ClipIndex: 1
+    - rid: 1249208141461848180
+      type: {class: FadeInReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: AMBIENT
+        WaitUntilEnd: 1
+        Time: 3
+    - rid: 1249208141461848181
+      type: {class: FadeOutReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: AMBIENT
+        WaitUntilEnd: 1
+        Time: 3
+    - rid: 1249208141461848192
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
       data:
         ID: 
         WaitUntilEnd: 0
-        Seconds: 2
-    - rid: 1249208091826454665
-      type: {class: PlayOnceReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+        Message: Starting footsteps...
+    - rid: 1249208141461848194
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
       data:
-        ID: TEST_BEEP
+        ID: 
         WaitUntilEnd: 0
-    - rid: 1249208091826454671
-      type: {class: StopReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+        Message: Stopping footsteps...
+    - rid: 1249208141461848195
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
       data:
-        ID: TEST_GROUP
+        ID: 
         WaitUntilEnd: 0
+        Message: Starting ambient...
+    - rid: 1249208141461848196
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Message: Stopping ambient...
+    - rid: 1249208141461848197
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Message: Started footsteps!
+    - rid: 1249208141461848198
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Message: Stopped footsteps!
+    - rid: 1249208141461848199
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Message: Started ambient!
+    - rid: 1249208141461848200
+      type: {class: LogReaction, ns: Resonant.Runtime, asm: owmacohe.resonant.runtime}
+      data:
+        ID: 
+        WaitUntilEnd: 0
+        Message: Stopped ambient!

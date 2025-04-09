@@ -71,9 +71,22 @@ namespace Resonant.Editor
 
                         try
                         {
-                            int.Parse(value);
-
-                            field.SetValueWithoutNotify(value);
+                            if (string.IsNullOrEmpty(value))
+                            {
+                                value = "0";
+                                field.SetValueWithoutNotify("");
+                            }
+                            else if (value == "-")
+                            {
+                                value = "0";
+                                field.SetValueWithoutNotify("-");
+                            }
+                            else
+                            {
+                                int.Parse(value);
+                                field.SetValueWithoutNotify(value);
+                            }
+                            
                             i.SetValue(reaction, int.Parse(string.IsNullOrEmpty(value) ? "0" : value));
 
                             editedAction?.Invoke();
@@ -95,9 +108,22 @@ namespace Resonant.Editor
 
                         try
                         {
-                            float.Parse(value);
-
-                            field.SetValueWithoutNotify(value);
+                            if (string.IsNullOrEmpty(value))
+                            {
+                                value = "0";
+                                field.SetValueWithoutNotify("");
+                            }
+                            else if (value == "-")
+                            {
+                                value = "0";
+                                field.SetValueWithoutNotify("-");
+                            }
+                            else
+                            {
+                                float.Parse(value);
+                                field.SetValueWithoutNotify(value);
+                            }
+                            
                             i.SetValue(reaction, float.Parse(string.IsNullOrEmpty(value) ? "0" : value));
 
                             editedAction?.Invoke();
