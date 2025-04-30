@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -345,11 +346,11 @@ MonoBehaviour:
   DefaultVolume: 0
   DefaultPitch: 0
   clips:
-  - {fileID: 8300000, guid: fee28561f38b13a48ae939c9fb31b6f5, type: 3}
-  - {fileID: 8300000, guid: f0423d25673d017478d334798fc96925, type: 3}
-  - {fileID: 8300000, guid: 5a158e9c1a15f2e419f73591c3aafe88, type: 3}
-  - {fileID: 8300000, guid: 88412c2fdfe22c342b5edbdefbabb7d6, type: 3}
-  - {fileID: 8300000, guid: 2498e5b1536ea164981914533f5a6837, type: 3}
+  - {fileID: 8300000, guid: 2c5cb80d80f51d543b555d948892ddf1, type: 3}
+  - {fileID: 8300000, guid: 042c68449be1ac64c987656064ada396, type: 3}
+  - {fileID: 8300000, guid: dd916cc95d0d3b2458ad5b3870b12b9e, type: 3}
+  - {fileID: 8300000, guid: dbd0583ebf7cb234dab956020335e16b, type: 3}
+  - {fileID: 8300000, guid: fcad191ca75d25c4394e5a1c0b8366cb, type: 3}
   loopOnStart: 0
   allowRepeats: 0
   delayModulation: {x: 2, y: 4}
@@ -636,8 +637,8 @@ MonoBehaviour:
   DefaultVolume: 0
   DefaultPitch: 0
   Clips:
-  - {fileID: 8300000, guid: 2fe5451605279f945b27533950d824cb, type: 3}
-  - {fileID: 8300000, guid: d8de835a88867eb48889ef533566729d, type: 3}
+  - {fileID: 8300000, guid: a828523fc0406684aaa26b61e5290555, type: 3}
+  - {fileID: 8300000, guid: c2486c8b4519fd343aecd1b34b5fb9d7, type: 3}
 --- !u!82 &414698639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -818,6 +819,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &458021399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,13 +884,13 @@ MonoBehaviour:
   DefaultVolume: 0
   DefaultPitch: 0
   clips:
-  - {fileID: 8300000, guid: 4b4683e56a7d0bd43ba5853a600b8ab2, type: 3}
-  - {fileID: 8300000, guid: 64a72e1843243764f9daa38cc71425b3, type: 3}
-  - {fileID: 8300000, guid: 5408f2044747d45458fd8b9847a80665, type: 3}
+  - {fileID: 8300000, guid: 875b081df42d6bd43a0bf77b3779d4a6, type: 3}
+  - {fileID: 8300000, guid: 05596adafa421524fadc0818743e2abd, type: 3}
+  - {fileID: 8300000, guid: 0568541b3738e8b448279c4a71d133e7, type: 3}
   loopOnStart: 0
   allowRepeats: 0
   delayModulation: {x: 0.3, y: 0.55}
-  volumeModulation: {x: -0.2, y: 0.2}
+  volumeModulation: {x: -0.1, y: 0.1}
   pitchModulation: {x: -0.1, y: 0.1}
   VolumeScale: 0
   PitchScale: 0
@@ -905,7 +907,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1198,8 +1200,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a3d3e310dbbd82f4c961256808e65c67, type: 3}
-  m_Resource: {fileID: 8300000, guid: a3d3e310dbbd82f4c961256808e65c67, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ae55a2ef7e6536044aa76ee08698dba3, type: 3}
+  m_Resource: {fileID: 8300000, guid: ae55a2ef7e6536044aa76ee08698dba3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1

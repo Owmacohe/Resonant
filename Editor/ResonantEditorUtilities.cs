@@ -10,7 +10,7 @@ namespace Resonant.Editor
 {
     public static class ResonantEditorUtilities
     {
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.1";
         
         #region VisualElements
         

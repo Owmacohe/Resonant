@@ -17,8 +17,8 @@ namespace Resonant.Runtime
         /// </summary>
         public AudioSource Source { get; protected set; }
         
-        public float DefaultVolume; // The default volume that this source started at
-        public float DefaultPitch; // The default pitch that this source started at
+        [HideInInspector] public float DefaultVolume; // The default volume that this source started at
+        [HideInInspector] public float DefaultPitch; // The default pitch that this source started at
 
         /// <summary>
         /// Called when this Component is reset via the inspector or is added
